@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Grease Radar — Wastewater Blockage Risk Prediction</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <b>GREASE RADAR</b>
+      <small>Hack4Vilnius · Challenge 12</small>
+    </div>
+    <span id="mode" class="status">Loading</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Prevent wastewater blockages before they happen.</h1>
+          <p>Identify recurring hotspots and prioritize preventive inspection using transparent, explainable risk scoring.</p>
+        </div>
+        <label class="upload">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Import official CSV
+          <input id="file" type="file" accept=".csv">
+        </label>
+      </div>
+    </section>
+
+    <section class="stats">
+      <article>
+        <label>Total incidents</label>
+        <strong id="total">—</strong>
+      </article>
+      <article>
+        <label>High-risk hotspots</label>
+        <strong id="high">—</strong>
+      </article>
+      <article>
+        <label>Recurring hotspots</label>
+        <strong id="recurring">—</strong>
+      </article>
+      <article>
+        <label>Data period</label>
+        <strong id="period">—</strong>
+      </article>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="title">
+          Risk map
+          <small>click a hotspot for details</small>
+        </div>
+        <div id="map"></div>
+      </div>
+      <div class="panel">
+        <div class="title">Priority hotspots</div>
+        <div id="list"></div>
+      </div>
+    </section>
+
+    <section class="grid lower">
+      <div class="panel">
+        <div class="title">Why is this area high-risk?</div>
+        <div id="why">Select a hotspot to see the risk breakdown.</div>
+      </div>
+      <div class="panel">
+        <div class="title">Historical backtest</div>
+        <div id="backtest">Loading backtest results...</div>
+      </div>
+    </section>
+
+    <section class="panel method">
+      <div class="title">Transparent Risk Score</div>
+      <div class="methodgrid">
+        <div>
+          <b>35%</b>
+          <strong>Frequency</strong>
+          <small>number of incidents</small>
+        </div>
+        <div>
+          <b>30%</b>
+          <strong>Recurrence</strong>
+          <small>distinct incident months</small>
+        </div>
+        <div>
+          <b>20%</b>
+          <strong>Recency</strong>
+          <small>how recently incidents occurred</small>
+        </div>
+        <div>
+          <b>15%</b>
+          <strong>Spatial density</strong>
+          <small>nearby incident cells</small>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

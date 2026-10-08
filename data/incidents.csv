@@ -1,0 +1,11 @@
+﻿latitude,longitude,date,segment_id,city,asset_type,previous_blockages_12m,previous_reports_12m,days_since_last_inspection,pipe_age_years,pipe_diameter_mm,pipe_length_m,condition_score_0_100,risk_score_0_100,data_status,risk_level,recommended_action,notes
+54.6872,25.2797,2026-01-01,VIL-001,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.6895,25.2686,2026-01-01,VIL-002,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.6838,25.2931,2026-01-01,VIL-003,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.7001,25.2448,2026-01-01,VIL-004,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.6758,25.2504,2026-01-01,VIL-005,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.7142,25.2927,2026-01-01,VIL-006,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.6619,25.3052,2026-01-01,VIL-007,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.7311,25.2588,2026-01-01,VIL-008,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.6517,25.2801,2026-01-01,VIL-009,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
+54.6917,25.3234,2026-01-01,VIL-010,Vilnius,sewer_network_segment,0,0,0,0,0,0,0,0,proxy,unknown,Populate with verified asset/incident data,Coordinates are sample points; do not treat as verified sewer assets.
