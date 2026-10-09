@@ -109,8 +109,18 @@
       <!-- Risk Map Page -->
       <div id="page-risk-map" class="page hidden">
         <section class="panel">
-          <div class="title">Risk Map</div>
-          <div id="map-full" style="height: 600px;"></div>
+          <div class="title">
+            <span>Official Vilniaus vandenys blockage map</span>
+            <a class="map-source-link" href="https://vvandenys.maps.arcgis.com/apps/instant/portfolio/index.html?appid=99799ba538924868b8a8b32bffa86389" target="_blank" rel="noopener noreferrer">Open in ArcGIS ↗</a>
+          </div>
+          <div class="map-embed">
+            <iframe
+              title="Official Vilniaus vandenys water supply interruptions map"
+              src="https://vvandenys.maps.arcgis.com/apps/instant/portfolio/index.html?appid=99799ba538924868b8a8b32bffa86389"
+              loading="lazy"
+              allowfullscreen></iframe>
+          </div>
+          <p class="map-attribution">Live map provided by Vilniaus vandenys via ArcGIS. The map content is maintained by the official data owner.</p>
         </section>
       </div>
 
@@ -394,7 +404,7 @@
             <p>Historical evaluation uses a 70-30 temporal split. Hotspot scores are calculated using only data available before the evaluation period to prevent information leakage. The system reports the percentage of future incidents that occurred in cells identified as high-risk.</p>
 
             <h3>Data Sources</h3>
-            <p>This prototype uses synthetic demonstration data. For production, integrate official Vilniaus vandenys incident data. The system accepts CSV files with latitude, longitude, and date columns.</p>
+            <p>The Risk Map includes the live public ArcGIS application <a href="https://vvandenys.maps.arcgis.com/apps/instant/portfolio/index.html?appid=99799ba538924868b8a8b32bffa86389" target="_blank" rel="noopener noreferrer">Vandens tiekimo pertrūkiai</a> maintained by Vilniaus vandenys. Overview analytics use synthetic demonstration data until an official incident CSV is imported.</p>
 
             <h3>Limitations</h3>
             <ul>

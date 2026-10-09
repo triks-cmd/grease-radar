@@ -1,4 +1,4 @@
-let map, mapFull, layer, data;
+let map, layer, data;
 
 const color = level => {
   switch(level) {
@@ -37,11 +37,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
     if (targetPage) {
       targetPage.classList.remove('hidden');
       targetPage.classList.add('active');
-    }
-    
-    // Initialize map if switching to risk-map page
-    if (page === 'risk-map' && data) {
-      setTimeout(() => initFullMap(), 100);
     }
     
     // Initialize operations page if switching to operations
@@ -117,28 +112,6 @@ function initOverviewMap() {
     `);
 
     marker.on('click', () => why(h, i));
-  });
-}
-
-function initFullMap() {
-  if (!mapFull) {
-    mapFull = L.map('map-full').setView([54.687, 25.28], 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(mapFull);
-  }
-
-  const layerFull = L.layerGroup().addTo(mapFull);
-  
-  data.hotspots.forEach((h, i) => {
-    const radius = Math.max(8, Math.min(20, 8 + h.risk / 10));
-    L.circleMarker([h.lat, h.lon], {
-      radius: radius,
-      color: color(h.level),
-      fillColor: color(h.level),
-      fillOpacity: 0.5,
-      weight: 2
-    }).addTo(layerFull).bindPopup(`Hotspot #${i + 1} - Risk: ${h.risk}/100`);
   });
 }
 
