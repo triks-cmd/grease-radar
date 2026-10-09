@@ -8,104 +8,407 @@
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <b>GREASE RADAR</b>
-      <small>Hack4Vilnius · Challenge 12</small>
-    </div>
-    <span id="mode" class="status">Loading</span>
-  </header>
+  <div class="app-container">
+    <nav class="sidebar">
+      <div class="sidebar-brand">
+        <b>GREASE RADAR</b>
+        <small>Hack4Vilnius</small>
+      </div>
+      <div class="nav-links">
+        <a href="#overview" class="nav-link active" data-page="overview">
+          <span>Overview</span>
+        </a>
+        <a href="#risk-map" class="nav-link" data-page="risk-map">
+          <span>Risk Map</span>
+        </a>
+        <a href="#hotspots" class="nav-link" data-page="hotspots">
+          <span>Hotspots</span>
+        </a>
+        <a href="#collection" class="nav-link" data-page="collection">
+          <span>Collection Planner</span>
+        </a>
+        <a href="#operations" class="nav-link" data-page="operations">
+          <span>Collection Operations</span>
+        </a>
+        <a href="#circular" class="nav-link" data-page="circular">
+          <span>Circular Economy</span>
+        </a>
+        <a href="#methodology" class="nav-link" data-page="methodology">
+          <span>Methodology</span>
+        </a>
+      </div>
+    </nav>
 
-  <main>
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>Prevent wastewater blockages before they happen.</h1>
-          <p>Identify recurring hotspots and prioritize preventive inspection using transparent, explainable risk scoring.</p>
-        </div>
-        <label class="upload">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="17 8 12 3 7 8"/>
-            <line x1="12" y1="3" x2="12" y2="15"/>
-          </svg>
-          Import official CSV
-          <input id="file" type="file" accept=".csv">
-        </label>
-      </div>
-    </section>
+    <main class="main-content">
+      <!-- Overview Page -->
+      <div id="page-overview" class="page active">
+        <section class="hero">
+          <div class="hero-bg"></div>
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1>Prevent wastewater blockages before they happen.</h1>
+              <p>Identify recurring hotspots and prioritize preventive inspection using transparent, explainable risk scoring.</p>
+            </div>
+            <label class="upload">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              Import official CSV
+              <input id="file" type="file" accept=".csv">
+            </label>
+          </div>
+        </section>
 
-    <section class="stats">
-      <article>
-        <label>Total incidents</label>
-        <strong id="total">—</strong>
-      </article>
-      <article>
-        <label>High-risk hotspots</label>
-        <strong id="high">—</strong>
-      </article>
-      <article>
-        <label>Recurring hotspots</label>
-        <strong id="recurring">—</strong>
-      </article>
-      <article>
-        <label>Data period</label>
-        <strong id="period">—</strong>
-      </article>
-    </section>
+        <section class="stats">
+          <article>
+            <label>Total incidents</label>
+            <strong id="total">—</strong>
+          </article>
+          <article>
+            <label>High-risk hotspots</label>
+            <strong id="high">—</strong>
+          </article>
+          <article>
+            <label>Recurring hotspots</label>
+            <strong id="recurring">—</strong>
+          </article>
+          <article>
+            <label>Data period</label>
+            <strong id="period">—</strong>
+          </article>
+        </section>
 
-    <section class="grid">
-      <div class="panel">
-        <div class="title">
-          Risk map
-          <small>click a hotspot for details</small>
-        </div>
-        <div id="map"></div>
-      </div>
-      <div class="panel">
-        <div class="title">Priority hotspots</div>
-        <div id="list"></div>
-      </div>
-    </section>
+        <section class="grid">
+          <div class="panel">
+            <div class="title">
+              Risk map
+              <small>click a hotspot for details</small>
+            </div>
+            <div id="map"></div>
+          </div>
+          <div class="panel">
+            <div class="title">Priority hotspots</div>
+            <div id="list"></div>
+          </div>
+        </section>
 
-    <section class="grid lower">
-      <div class="panel">
-        <div class="title">Why is this area high-risk?</div>
-        <div id="why">Select a hotspot to see the risk breakdown.</div>
+        <section class="grid lower">
+          <div class="panel">
+            <div class="title">Why is this area high-risk?</div>
+            <div id="why">Select a hotspot to see the risk breakdown.</div>
+          </div>
+          <div class="panel">
+            <div class="title">Historical backtest</div>
+            <div id="backtest">Loading backtest results...</div>
+          </div>
+        </section>
       </div>
-      <div class="panel">
-        <div class="title">Historical backtest</div>
-        <div id="backtest">Loading backtest results...</div>
-      </div>
-    </section>
 
-    <section class="panel method">
-      <div class="title">Transparent Risk Score</div>
-      <div class="methodgrid">
-        <div>
-          <b>35%</b>
-          <strong>Frequency</strong>
-          <small>number of incidents</small>
-        </div>
-        <div>
-          <b>30%</b>
-          <strong>Recurrence</strong>
-          <small>distinct incident months</small>
-        </div>
-        <div>
-          <b>20%</b>
-          <strong>Recency</strong>
-          <small>how recently incidents occurred</small>
-        </div>
-        <div>
-          <b>15%</b>
-          <strong>Spatial density</strong>
-          <small>nearby incident cells</small>
-        </div>
+      <!-- Risk Map Page -->
+      <div id="page-risk-map" class="page hidden">
+        <section class="panel">
+          <div class="title">Risk Map</div>
+          <div id="map-full" style="height: 600px;"></div>
+        </section>
       </div>
-    </section>
-  </main>
+
+      <!-- Hotspots Page -->
+      <div id="page-hotspots" class="page hidden">
+        <section class="panel">
+          <div class="title">All Hotspots</div>
+          <div id="hotspots-full"></div>
+        </section>
+      </div>
+
+      <!-- Collection Planner Page -->
+      <div id="page-collection" class="page hidden">
+        <section class="panel">
+          <div class="title">Collection Planner</div>
+          <div class="collection-content">
+            <p class="intro">Plan and prioritize used cooking oil collection activities based on risk hotspots and infrastructure.</p>
+            <div class="collection-grid">
+              <div class="collection-card">
+                <h3>Potential Collection Zones</h3>
+                <p>Areas with high blockage risk may indicate higher restaurant density and potential oil collection opportunities.</p>
+                <div id="collection-zones"></div>
+              </div>
+              <div class="collection-card">
+                <h3>Collection Points</h3>
+                <p>Add or import verified collection point locations.</p>
+                <button class="btn-primary" onclick="addCollectionPoint()">Add Collection Point</button>
+                <div id="collection-points"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Collection Operations Page -->
+      <div id="page-operations" class="page hidden">
+        <section class="panel">
+          <div class="title">Collection Operations Dashboard</div>
+          <div class="operations-content">
+            <p class="intro">Real-time collection metrics and route optimization insights.</p>
+            
+            <section class="stats">
+              <article>
+                <label>Total Collection Points</label>
+                <strong id="ops-total-points">12</strong>
+              </article>
+              <article>
+                <label>Active Routes</label>
+                <strong id="ops-active-routes">5</strong>
+              </article>
+              <article>
+                <label>Collected Today</label>
+                <strong id="ops-collected-today">850 L</strong>
+              </article>
+              <article>
+                <label>Efficiency</label>
+                <strong id="ops-efficiency">92%</strong>
+              </article>
+            </section>
+
+            <section class="grid">
+              <div class="panel">
+                <div class="title">Route Overview</div>
+                <div class="route-stats">
+                  <div class="route-stat">
+                    <span class="route-label">Completed</span>
+                    <span class="route-value completed">8</span>
+                  </div>
+                  <div class="route-stat">
+                    <span class="route-label">In Progress</span>
+                    <span class="route-value in-progress">3</span>
+                  </div>
+                  <div class="route-stat">
+                    <span class="route-label">Pending</span>
+                    <span class="route-value pending">2</span>
+                  </div>
+                  <div class="route-stat">
+                    <span class="route-label">Delayed</span>
+                    <span class="route-value delayed">1</span>
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="title">Optimization Impact (Today)</div>
+                <div class="impact-metrics">
+                  <div class="impact-item">
+                    <span>Distance Saved</span>
+                    <strong>24 km</strong>
+                  </div>
+                  <div class="impact-item">
+                    <span>Fuel Saved</span>
+                    <strong>5.2 L</strong>
+                  </div>
+                  <div class="impact-item">
+                    <span>Time Saved</span>
+                    <strong>45 min</strong>
+                  </div>
+                  <div class="impact-item">
+                    <span>Cost Saved</span>
+                    <strong>€45</strong>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="title">Live Vehicle Tracking</div>
+              <div class="vehicle-list">
+                <div class="vehicle-item">
+                  <div class="vehicle-info">
+                    <strong>VH-101</strong>
+                    <span class="vehicle-status in-progress">In Progress</span>
+                  </div>
+                  <div class="vehicle-route">Route A • 3 stops remaining</div>
+                  <div class="vehicle-eta">ETA: 14:30</div>
+                </div>
+                <div class="vehicle-item">
+                  <div class="vehicle-info">
+                    <strong>VH-102</strong>
+                    <span class="vehicle-status completed">Completed</span>
+                  </div>
+                  <div class="vehicle-route">Route B • All stops done</div>
+                  <div class="vehicle-eta">Returned to depot</div>
+                </div>
+                <div class="vehicle-item">
+                  <div class="vehicle-info">
+                    <strong>VH-103</strong>
+                    <span class="vehicle-status in-progress">In Progress</span>
+                  </div>
+                  <div class="vehicle-route">Route C • 5 stops remaining</div>
+                  <div class="vehicle-eta">ETA: 15:15</div>
+                </div>
+                <div class="vehicle-item">
+                  <div class="vehicle-info">
+                    <strong>VH-104</strong>
+                    <span class="vehicle-status delayed">Delayed</span>
+                  </div>
+                  <div class="vehicle-route">Route D • Traffic jam ahead</div>
+                  <div class="vehicle-eta">ETA: 16:00 (+30 min)</div>
+                </div>
+                <div class="vehicle-item">
+                  <div class="vehicle-info">
+                    <strong>VH-105</strong>
+                    <span class="vehicle-status pending">Pending</span>
+                  </div>
+                  <div class="vehicle-route">Route E • Not started</div>
+                  <div class="vehicle-eta">Starts at 14:00</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="title">Route Optimization Insights</div>
+              <div class="insights-list">
+                <div class="insight-item">
+                  <span class="insight-icon">✓</span>
+                  <span>Routes optimized based on real-time traffic conditions</span>
+                </div>
+                <div class="insight-item">
+                  <span class="insight-icon">✓</span>
+                  <span>High-fill-level bins prioritized for collection</span>
+                </div>
+                <div class="insight-item">
+                  <span class="insight-icon">⚠</span>
+                  <span>Route D experiencing delays due to construction on Savanorių g.</span>
+                </div>
+                <div class="insight-item">
+                  <span class="insight-icon">✓</span>
+                  <span>Adjusted routing based on afternoon traffic patterns</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="title">Next Best Action</div>
+              <div class="action-recommendation">
+                <p><strong>Reassign Vehicle VH-104 to Route E</strong></p>
+                <p class="action-detail">This would allow Route E to start on time and optimize overall fleet efficiency.</p>
+                <div class="action-benefits">
+                  <span>Estimated time saved: 18 min</span>
+                  <span>Estimated fuel saved: 3.5 L</span>
+                </div>
+                <button class="btn-primary" onclick="applyRecommendation()">Apply Now</button>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+
+      <!-- Circular Economy Page -->
+      <div id="page-circular" class="page hidden">
+        <section class="panel">
+          <div class="title">Waste-to-Fuel Calculator</div>
+          <div class="circular-content">
+            <p class="intro">Estimate potential biodiesel production from collected used cooking oil.</p>
+            <div class="calculator">
+              <div class="calc-inputs">
+                <div class="input-group">
+                  <label>Collected Volume (liters)</label>
+                  <input type="number" id="calc-volume" value="1000" min="0">
+                </div>
+                <div class="input-group">
+                  <label>Recoverable Fraction (%)</label>
+                  <input type="number" id="calc-recoverable" value="85" min="0" max="100">
+                </div>
+                <div class="input-group">
+                  <label>Conversion Yield (liters fuel per liter oil)</label>
+                  <input type="number" id="calc-yield" value="0.9" min="0" max="1" step="0.01">
+                </div>
+                <button class="btn-primary" onclick="calculateFuel()">Calculate</button>
+              </div>
+              <div class="calc-results">
+                <h3>Results</h3>
+                <div class="result-item">
+                  <span>Usable Feedstock:</span>
+                  <strong id="result-feedstock">— liters</strong>
+                </div>
+                <div class="result-item">
+                  <span>Estimated Fuel Output:</span>
+                  <strong id="result-fuel">— liters</strong>
+                </div>
+                <div class="result-item">
+                  <span>Assumptions:</span>
+                  <small id="result-assumptions">—</small>
+                </div>
+              </div>
+            </div>
+            <div class="waste-streams">
+              <h3>Waste Stream Categories</h3>
+              <div class="stream-card">
+                <h4>Used Cooking Oil</h4>
+                <p>Suitable for biodiesel after proper processing. Collected separately from restaurants.</p>
+                <span class="stream-tag">High potential</span>
+              </div>
+              <div class="stream-card">
+                <h4>Grease Trap Waste</h4>
+                <p>Contains water, food solids, detergents. May require pre-treatment before processing.</p>
+                <span class="stream-tag">Medium potential</span>
+              </div>
+              <div class="stream-card">
+                <h4>Sewer Recovered Material</h4>
+                <p>Highly contaminated. Generally unsuitable for direct biodiesel production.</p>
+                <span class="stream-tag">Low potential</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Methodology Page -->
+      <div id="page-methodology" class="page hidden">
+        <section class="panel">
+          <div class="title">Methodology</div>
+          <div class="methodology-content">
+            <h3>Risk Score Calculation</h3>
+            <div class="methodgrid">
+              <div>
+                <b>35%</b>
+                <strong>Frequency</strong>
+                <small>number of incidents</small>
+              </div>
+              <div>
+                <b>30%</b>
+                <strong>Recurrence</strong>
+                <small>distinct incident months</small>
+              </div>
+              <div>
+                <b>20%</b>
+                <strong>Recency</strong>
+                <small>how recently incidents occurred</small>
+              </div>
+              <div>
+                <b>15%</b>
+                <strong>Spatial density</strong>
+                <small>nearby incident cells</small>
+              </div>
+            </div>
+            <p class="method-note">These weights are baseline heuristics for validation, not scientifically validated constants. Risk scores are heuristic rankings, not calibrated probabilities of future blockages.</p>
+
+            <h3>Backtesting Methodology</h3>
+            <p>Historical evaluation uses a 70-30 temporal split. Hotspot scores are calculated using only data available before the evaluation period to prevent information leakage. The system reports the percentage of future incidents that occurred in cells identified as high-risk.</p>
+
+            <h3>Data Sources</h3>
+            <p>This prototype uses synthetic demonstration data. For production, integrate official Vilniaus vandenys incident data. The system accepts CSV files with latitude, longitude, and date columns.</p>
+
+            <h3>Limitations</h3>
+            <ul>
+              <li>Risk scores are heuristic rankings, not calibrated probabilities</li>
+              <li>Spatial proximity does not prove causation</li>
+              <li>System does not identify specific businesses as responsible</li>
+              <li>Fuel calculations are scenario-based estimates, not measured production</li>
+              <li>Backtesting on demo data does not indicate real-world performance</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/static/app.js"></script>

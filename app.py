@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 import pandas as pd, numpy as np
 from pathlib import Path
+from datetime import datetime
 
 app=Flask(__name__)
 DATA=Path('data'); DATA.mkdir(exist_ok=True)
 OFFICIAL=DATA/'incidents.csv'
 DEMO=DATA/'demo_incidents.csv'
+COLLECTION=DATA/'collection_points.csv'
 CELL=.005
 
 def load_df():
@@ -108,6 +110,69 @@ def hotspot_detail(index):
         'recurrence':int(row.recurrence),
         'recency':int(row.recency),
         'density':int(row.density)
+    })
+
+@app.route('/api/collection', methods=['GET', 'POST'])
+def collection():
+    if request.method == 'GET':
+        if not COLLECTION.exists():
+            return jsonify({'points': [], 'total': 0})
+        try:
+            df = pd.read_csv(COLLECTION)
+            points = []
+            for _, row in df.iterrows():
+                points.append({
+                    'id': row.get('id', ''),
+                    'name': row.get('name', ''),
+                    'lat': float(row.get('lat', 0)),
+                    'lon': float(row.get('lon', 0)),
+                    'type': row.get('type', 'unknown'),
+                    'volume': row.get('volume', 0),
+                    'date': row.get('date', '')
+                })
+            return jsonify({'points': points, 'total': len(points)})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    
+    if request.method == 'POST':
+        data = request.json
+        if not COLLECTION.exists():
+            df = pd.DataFrame(columns=['id', 'name', 'lat', 'lon', 'type', 'volume', 'date'])
+        else:
+            df = pd.read_csv(COLLECTION)
+        
+        new_point = pd.DataFrame([{
+            'id': data.get('id', f'CP-{len(df)+1}'),
+            'name': data.get('name', ''),
+            'lat': data.get('lat', 0),
+            'lon': data.get('lon', 0),
+            'type': data.get('type', 'restaurant'),
+            'volume': data.get('volume', 0),
+            'date': datetime.now().strftime('%Y-%m-%d')
+        }])
+        
+        df = pd.concat([df, new_point], ignore_index=True)
+        df.to_csv(COLLECTION, index=False)
+        return jsonify({'ok': True, 'id': new_point.iloc[0]['id']})
+
+@app.route('/api/fuel-calculate', methods=['POST'])
+def fuel_calculate():
+    data = request.json
+    volume = float(data.get('volume', 0))
+    recoverable = float(data.get('recoverable', 85)) / 100
+    yield_factor = float(data.get('yield', 0.9))
+    
+    feedstock = volume * recoverable
+    fuel_output = feedstock * yield_factor
+    
+    return jsonify({
+        'feedstock': round(feedstock, 2),
+        'fuel_output': round(fuel_output, 2),
+        'assumptions': {
+            'volume': volume,
+            'recoverable_percent': recoverable * 100,
+            'yield_factor': yield_factor
+        }
     })
 
 if __name__=='__main__':app.run(host='0.0.0.0',port=5000)
